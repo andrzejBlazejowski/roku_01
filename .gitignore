@@ -1,0 +1,22 @@
+# Roku / BrightScript — packages and deploy staging
+*.pkg
+out/
+.roku-deploy-staging/
+
+# VS Code
+.vscode/
+
+# Cursor
+.cursor/
+
+# Editor workspace files
+*.code-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs and temp
+*.log
+tmp/
+temp/
