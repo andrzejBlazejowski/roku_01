@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Router" extends="Group">
+	<interface>
+		<field id="route" type="string" alwaysNotify="true" />
+	</interface>
+	<children>
+		<Group id="pageHost" translation="[0, 0]" width="1280" height="720" />
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/Router.brs" />
+</component>

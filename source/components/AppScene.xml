@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AppScene" extends="Scene">
+	<children>
+		<Router id="router" translation="[0, 0]" width="1280" height="720" />
+	</children>
+</component>

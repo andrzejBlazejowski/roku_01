@@ -12,8 +12,8 @@ sub Main()
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
 
-    'Root scene — home landing (replace children / swap scene for navigation later)'
-    scene = screen.CreateScene("HomeScene")
+    'Root shell + Router swaps subpages (pkg:/components/Router.xml).'
+    scene = screen.CreateScene("AppScene")
     screen.show()
 
     while(true)
