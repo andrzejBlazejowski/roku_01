@@ -59,8 +59,11 @@ endif
 # can be changed during the make if needed.
 APPS_ROOT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 
-# the current directory is the app root directory
+# Application (channel) root: directory that contains manifest and is zipped for deploy.
+# May be set by the caller to an absolute path so recipes work regardless of make's cwd.
+ifndef SOURCEDIR
 SOURCEDIR := .
+endif
 
 DISTREL := $(APPS_ROOT_DIR)/dist
 COMMONREL := $(APPS_ROOT_DIR)/common
@@ -134,6 +137,9 @@ endif
 ifeq ($(HOST_OS),cygwin)
 	# This assumes that the Windows ping command is used, not cygwin's.
 	QUICK_PING_ARGS = -n 1 -w 1000
+else ifeq ($(HOST_OS),macos)
+	# BSD ping: no -w (Linux deadline); use -W for per-reply wait (milliseconds).
+	QUICK_PING_ARGS = -c 1 -W 1000
 else # Linux
 	QUICK_PING_ARGS = -c 1 -w 1
 endif
@@ -147,7 +153,7 @@ endif
 # This contains the set of files that are to be deployed on a Roku.
 # -------------------------------------------------------------------------
 .PHONY: $(APPNAME)
-$(APPNAME): manifest
+$(APPNAME): $(SOURCEDIR)/manifest
 	@echo "*** Creating $(APPNAME).zip ***"
 
 	@echo "  >> removing old application zip $(APP_ZIP_FILE)"
@@ -174,9 +180,9 @@ $(APPNAME): manifest
 # zip .png files without compression
 # do not zip up Makefiles, or any files ending with '~'
 	@echo "  >> creating application zip $(APP_ZIP_FILE)"
-	@if [ -d $(SOURCEDIR) ]; then \
-		(zip -0 -r "$(APP_ZIP_FILE)" . -i \*.png $(ZIP_EXCLUDE)); \
-		(zip -9 -r "$(APP_ZIP_FILE)" . -x \*~ -x \*.png -x Makefile $(ZIP_EXCLUDE)); \
+	@if [ -d "$(SOURCEDIR)" ]; then \
+		(cd "$(SOURCEDIR)" && zip -0 -r "$(APP_ZIP_FILE)" . -i \*.png $(ZIP_EXCLUDE)); \
+		(cd "$(SOURCEDIR)" && zip -9 -r "$(APP_ZIP_FILE)" . -x \*~ -x \*.png -x Makefile $(ZIP_EXCLUDE)); \
 	else \
 		echo "Source for $(APPNAME) not found at $(SOURCEDIR)"; \
 	fi
@@ -575,7 +581,7 @@ define CHECK_NATIVE_TARGET
 	if [ -z "$(ROKU_NATIVE_DEV)" ]; then \
 		echo "ERROR: ROKU_NATIVE_DEV not defined"; \
 		exit 1; \
-	i
+	fi
 	if [ ! -d "$(ROKU_NATIVE_DEV)" ]; then \
 		echo "ERROR: native dev dir not found: $(ROKU_NATIVE_DEV)"; \
 		exit 1; \
