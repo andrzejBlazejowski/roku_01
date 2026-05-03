@@ -12,8 +12,8 @@ sub Main()
     m.port = CreateObject("roMessagePort")
     screen.setMessagePort(m.port)
 
-    'Create a scene and load /components/helloworld.xml'
-    scene = screen.CreateScene("HelloWorld")
+    'Root scene — home landing (replace children / swap scene for navigation later)'
+    scene = screen.CreateScene("HomeScene")
     screen.show()
 
     while(true)

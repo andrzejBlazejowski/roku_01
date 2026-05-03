@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="AboutScene" extends="Scene">
+	<children>
+		<Label
+			id="placeholder"
+			text="About (placeholder)"
+			width="1280"
+			height="720"
+			horizAlign="center"
+			vertAlign="center"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/AboutScene.brs" />
+</component>
