@@ -7,9 +7,6 @@ makefile/dist/
 # VS Code
 .vscode/
 
-# Cursor
-.cursor/
-
 # Editor workspace files
 *.code-workspace
 

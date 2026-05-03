@@ -1,0 +1,52 @@
+---
+description: Roku channel development — Scene Graph, BrightScript, packaging
+alwaysApply: true
+---
+
+# Roku / Scene Graph / BrightScript
+
+**Stack:** BrightScript (`.brs`) + **Roku SceneGraph (RSG)** XML (`.xml`). Architecture is **component-based**; prefer **modern BrightScript** idioms documented for current Roku OS.
+
+## Official docs and samples (repeatable guidance)
+
+- For **documentation-heavy** work (APIs, manifest, certification, firmware specifics), have the chat **include** **`docs/roku-references.md`** (repo root: [`docs/roku-references.md`](../../docs/roku-references.md)) via **`@docs/roku-references.md`** so answers are grounded in linked Roku sources and the sample repo.
+- **`docs/roku-references.md`** lists the [developer program getting started](https://developer.roku.com/en-gb/docs/developer-program/getting-started/roku-dev-prog.md) page, portal navigation targets, and [rokudev/samples](https://github.com/rokudev/samples) for working channel patterns. Prefer verifying behavior there instead of inventing platform details.
+
+## Platform and packaging
+
+- Treat the channel as a **BrightScript + Scene Graph** app: entry is **`Main.brs`** with `sub Main()` that creates a **Scene** (or root component) and `show()` the configured screen. **Do not drive or mutate UI from `Main`** beyond wiring the scene — UI reacts via **field observers** on `roSGNode` in components.
+- Reference bundled assets with **`pkg:/`** (manifest icons, splash, component `uri`, Poster `uri`, etc.).
+- **`manifest`** drives metadata, splash timing, poster paths, and versioning; keep required art sizes per Roku docs for each density.
+- Prefer the project’s **makefile/build** output layout when discussing installable zips (`dist/`, `out/`, etc.).
+
+## Scene Graph XML (`.xml` components)
+
+- **Prioritize SceneGraph XML for layout** over building UI purely in BrightScript.
+- Each **custom component** should have a **`.xml`** plus a **`.brs`** for logic (via `<script uri="..."/>`). **`Main.brs`** is the exception: entry/setup only.
+- Root tag is **`<component>`** with `name` and `extends` (e.g. `Group`, `Scene`, `Task`). Match Roku’s **extends** hierarchy; do not invent unsupported base types.
+- Declare observable state with **`<interface>`** and **`<field>`** — use `type`, `alwaysNotify`, and `alias` only where the platform supports them for that node type.
+- Put runtime logic in **`<script type="text/brightscript" />`** via **`uri`**. Keep XML for structure and field wiring; avoid huge inline scripts.
+- Use **`observedFields`** / field observers for `m.top` interface fields; avoid tight spin-waits — drive UI from field changes and **Task** completion.
+- **Detach observers** and release references appropriately; in components that implement it, perform observer cleanup in **`onDetach`** (or equivalent lifecycle) so nodes do not leak or fire after teardown.
+- For lists/grids, use **`ContentNode`** trees and built-in list/grid nodes; update content by replacing or updating descendant nodes, not by ad-hoc globals.
+- For network and long work, use a **`Task`** node and **`roUrlTransfer`** inside it so the render thread stays responsive.
+
+## BrightScript (`.brs`)
+
+- BrightScript is **untyped and procedural**; use **`sub` / `function`**, **`roAssociativeArray`** / associative arrays for structured data, and **`for each`** for collections where appropriate.
+- In Scene Graph components, **`m.top`** is the **component node**; use `m.top.field = value` for interface fields and `m.someNode = m.top.findNode("id")` after the scene tree exists.
+- **Debugging:** `print` / **`?`** are fine for dev; **remove or gate debug prints before production**.
+- **Errors:** prefer **explicit `if` checks**, HTTP status codes, and API return values. Do not assume **JavaScript-style `try`/`catch`** or portable exception flow across firmware.
+- Do not use patterns from other languages (classes, Promises, `async`/`await`, **npm** packages) unless they map to documented BrightScript behavior.
+- **Networking:** use **`roUrlTransfer`** for HTTP — not **`fetch`**, **`axios`**, or browser APIs.
+- Respect **firmware / min OS** assumptions: check Roku docs when using newer Scene Graph or API features.
+
+## Out-of-scope / anti-patterns for suggestions
+
+- Do **not** suggest **web UI frameworks** (e.g. React, Vue) or **`npm`** dependencies for channel code.
+- Do **not** suggest **`fetch`**, **`axios`**, or other non-Roku HTTP stacks.
+
+## Naming and repo layout
+
+- **Prefer `CamelCase`** (or consistent **PascalCase** component `name` attributes per Roku docs) for **new** components and filenames; legacy names in `source/` may differ — match them when editing existing files.
+- When adding components, keep **one component per XML** with a clear `name` and co-located script `uri`, aligned with `source/source/Main.brs` and `source/components/*.xml`.
