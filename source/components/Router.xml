@@ -4,7 +4,7 @@
 		<field id="route" type="string" alwaysNotify="true" />
 	</interface>
 	<children>
-		<Group id="pageHost" translation="[0, 0]" width="1280" height="720" />
+		<Group id="pageHost" translation="[0, 0]" width="1020" height="720" />
 	</children>
 	<script type="text/brightscript" uri="pkg:/components/Router.brs" />
 </component>

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="AppScene" extends="Scene">
 	<children>
-		<Router id="router" translation="[0, 0]" width="1280" height="720" />
+		<!-- Router initializes first; Navigation initializes last so the menu steals initial focus -->
+		<Router id="router" translation="[260, 0]" width="1020" height="720" />
+		<Navigation id="navigation" translation="[0, 0]" width="260" height="720" />
 	</children>
 </component>

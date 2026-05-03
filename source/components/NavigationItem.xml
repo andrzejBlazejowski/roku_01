@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="NavigationItem" extends="Group" focusable="true">
+	<interface>
+		<field id="routeId" type="string" />
+		<field id="title" type="string" alwaysNotify="true" />
+	</interface>
+	<children>
+		<Label
+			id="titleLabel"
+			text=""
+			height="42"
+			width="200"
+			horizAlign="left"
+			vertAlign="center"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/NavigationItem.brs" />
+</component>

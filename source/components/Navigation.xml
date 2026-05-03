@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Navigation" extends="Group">
+	<children>
+		<Rectangle color="0x202020FF" translation="[0, 0]" width="260" height="720" opacity="1" />
+		<Label
+			id="heading"
+			text="Menu"
+			translation="[24, 32]"
+			width="212"
+			height="28"
+			color="0x888888FF"
+		/>
+		<LayoutGroup
+			id="itemList"
+			layoutDirection="vert"
+			itemSpacing="[0, 16]"
+			translation="[24, 80]"
+			horizAlignment="left"
+			vertAlignment="top"
+		>
+			<NavigationItem routeId="home" title="Home" />
+			<NavigationItem routeId="trending" title="Trending" />
+			<NavigationItem routeId="about" title="About" />
+			<NavigationItem routeId="settings" title="Settings" />
+			<NavigationItem routeId="assetDetails" title="Asset details" />
+			<NavigationItem routeId="player" title="Player" />
+		</LayoutGroup>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/Navigation.brs" />
+</component>

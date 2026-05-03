@@ -51,7 +51,14 @@ sub presentRoute(routeId)
 	m.pageHost.appendChild(page)
 	m.currentPage = page
 	m.loadedRouteId = id
-	page.width = 1280
-	page.height = 720
-	page.setFocus(true)
+
+	w = m.pageHost.width
+	h = m.pageHost.height
+	if w <> invalid AND h <> invalid AND w > 0 AND h > 0 then
+		page.width = w
+		page.height = h
+	else
+		page.width = 1020
+		page.height = 720
+	end if
 end sub
