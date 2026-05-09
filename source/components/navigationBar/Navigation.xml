@@ -26,5 +26,5 @@
 			<NavigationItem routeId="player" title="Player" />
 		</LayoutGroup>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/Navigation.brs" />
+	<script type="text/brightscript" uri="pkg:/components/navigationBar/Navigation.brs" />
 </component>

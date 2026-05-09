@@ -10,5 +10,5 @@
 			vertAlign="center"
 		/>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/TrendingScene.brs" />
+	<script type="text/brightscript" uri="pkg:/components/scenes/TrendingScene.brs" />
 </component>

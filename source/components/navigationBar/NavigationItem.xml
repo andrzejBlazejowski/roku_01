@@ -14,5 +14,5 @@
 			vertAlign="center"
 		/>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/NavigationItem.brs" />
+	<script type="text/brightscript" uri="pkg:/components/navigationBar/NavigationItem.brs" />
 </component>

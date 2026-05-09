@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="AboutScene" extends="Group" focusable="true">
+<component name="PlayerScene" extends="Group" focusable="true">
 	<children>
 		<Label
 			id="placeholder"
-			text="About (placeholder)"
+			text="Player (placeholder)"
 			width="1280"
 			height="720"
 			horizAlign="center"
 			vertAlign="center"
 		/>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/AboutScene.brs" />
+	<script type="text/brightscript" uri="pkg:/components/scenes/PlayerScene.brs" />
 </component>
