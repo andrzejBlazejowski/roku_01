@@ -1,9 +1,47 @@
 sub init()
 	m.navigationItemsList = m.top.findNode("navigationItemsList")
+	syncActiveRouteFromRouter()
+	observeRouterRoute()
 	m.navigationItemsList.content = navigationContent()
 	m.navigationItemsList.observeField("itemSelected", "onNavigationItemSelected")
 	m.top.observeField("focusedChild", "OnChildFocused")
+	m.top.navVisualRev = 0
+	observeSceneFocusedChild()
 	m.top.setFocus(true)
+end sub
+
+sub syncActiveRouteFromRouter()
+	r = routerFromScene()
+	if r = invalid then return
+	rid = r.route
+	if rid = invalid OR rid = "" then rid = "home"
+	m.top.activeRouteId = rid
+end sub
+
+sub observeRouterRoute()
+	r = routerFromScene()
+	if r = invalid then return
+	r.observeField("route", "onRouterRouteChanged")
+end sub
+
+sub onRouterRouteChanged()
+	syncActiveRouteFromRouter()
+end sub
+
+sub bumpNavVisualRev()
+	n = m.top.navVisualRev
+	if n = invalid then n = 0
+	m.top.navVisualRev = n + 1
+end sub
+
+sub observeSceneFocusedChild()
+	sc = m.top.getScene()
+	if sc = invalid then return
+	sc.observeField("focusedChild", "onSceneFocusedChildChanged")
+end sub
+
+sub onSceneFocusedChildChanged()
+	bumpNavVisualRev()
 end sub
 
 sub onNavigationItemSelected()

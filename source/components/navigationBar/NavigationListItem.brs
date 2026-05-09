@@ -1,5 +1,31 @@
 sub init()
 	m.titleLabel = m.top.findNode("titleLabel")
+	ensureNavigationObservers()
+	updateVisualState()
+end sub
+
+function navigationGroup() as Object
+	n = m.top.getParent()
+	while n <> invalid
+		if n.subtype() = "Navigation" then return n
+		n = n.getParent()
+	end while
+	s = m.top.getScene()
+	if s = invalid then return invalid
+	return s.findNode("navigation")
+end function
+
+sub ensureNavigationObservers()
+	if m.navObserversAttached = true then return
+	m.navOwner = navigationGroup()
+	if m.navOwner = invalid then return
+	m.navOwner.observeField("activeRouteId", "onNavigationOwnerFieldChanged")
+	m.navOwner.observeField("navVisualRev", "onNavigationOwnerFieldChanged")
+	m.navObserversAttached = true
+end sub
+
+sub onNavigationOwnerFieldChanged()
+	updateVisualState()
 end sub
 
 sub onItemContentChanged()
@@ -16,17 +42,37 @@ sub applyFromContent()
 	if m.titleLabel = invalid then return
 	c = m.top.itemContent
 	if c = invalid then return
+	ensureNavigationObservers()
 	t = c.TITLE
 	if t = invalid OR t = "" then t = c.routeId
 	if t <> invalid AND t <> "" then m.titleLabel.text = t
-	onFocusVisualChanged()
+	updateVisualState()
 end sub
 
 sub onFocusVisualChanged()
+	updateVisualState()
+end sub
+
+sub updateVisualState()
 	if m.titleLabel = invalid then return
 	focused = m.top.listHasFocus AND (m.top.itemHasFocus OR m.top.focusPercent > 0.5)
 	if focused then
 		m.titleLabel.color = "0xFF0000FF"
+		return
+	end if
+	myRoute = invalid
+	c = m.top.itemContent
+	if c <> invalid then myRoute = c.routeId
+	activeId = invalid
+	if m.navOwner <> invalid then activeId = m.navOwner.activeRouteId
+	if activeId = invalid OR activeId = "" then
+		r = router()
+		if r <> invalid then activeId = r.route
+	end if
+	if activeId = invalid OR activeId = "" then activeId = "home"
+	isActive = myRoute <> invalid AND myRoute <> "" AND activeId = myRoute
+	if isActive then
+		m.titleLabel.color = "0xFFFFFFFF"
 	else
 		m.titleLabel.color = "0xCCFFFFFF"
 	end if

@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <component name="Navigation" extends="Group">
+	<interface>
+		<field id="activeRouteId" type="string" alwaysNotify="true" />
+		<field id="navVisualRev" type="integer" alwaysNotify="true" />
+	</interface>
 	<children>
 		<Rectangle color="0x202020FF" translation="[0, 0]" width="260" height="720" opacity="1" />
 		<Label

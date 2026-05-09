@@ -35,7 +35,10 @@ sub presentRoute(routeId)
 	end if
 	if typeName = invalid then return
 
-	if m.loadedRouteId = id AND m.currentPage <> invalid then return
+	if m.loadedRouteId = id AND m.currentPage <> invalid then
+		m.currentPage.setFocus(true)
+		return
+	end if
 
 	if m.currentPage <> invalid then
 		m.pageHost.removeChild(m.currentPage)
@@ -61,6 +64,8 @@ sub presentRoute(routeId)
 		page.width = 1020
 		page.height = 720
 	end if
+
+	page.setFocus(true)
 end sub
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
