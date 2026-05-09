@@ -66,9 +66,7 @@ end sub
 function onKeyEvent(key as String, press as Boolean) as Boolean
     if not press then return false ' optional: ignore key-up
     if key = "OK"
-        print "OK"
-        print "router--------------------------------"
-        return true ' consumed — platform won't bubble default behavior
+        return false ' let focused content handle OK (MarkupList itemSelected, players, etc.)
     else if key = "back"
         print "Back"
         print "router--------------------------------"

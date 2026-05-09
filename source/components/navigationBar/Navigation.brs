@@ -1,9 +1,32 @@
 sub init()
 	m.navigationItemsList = m.top.findNode("navigationItemsList")
 	m.navigationItemsList.content = navigationContent()
+	m.navigationItemsList.observeField("itemSelected", "onNavigationItemSelected")
 	m.top.observeField("focusedChild", "OnChildFocused")
 	m.top.setFocus(true)
 end sub
+
+sub onNavigationItemSelected()
+	list = m.navigationItemsList
+	if list = invalid then return
+	idx = list.itemSelected
+	if idx = invalid OR idx < 0 then return
+	root = list.content
+	if root = invalid then return
+	itemNode = root.getChild(idx)
+	if itemNode = invalid then return
+	route = itemNode.routeId
+	if route = invalid OR route = "" then return
+	r = routerFromScene()
+	if r = invalid then return
+	r.route = route
+end sub
+
+function routerFromScene() as Object
+	s = m.top.getScene()
+	if s = invalid then return invalid
+	return s.findNode("router")
+end function
 
 function navigationContent() as Object
 	items = CreateObject("roArray", 0, true)

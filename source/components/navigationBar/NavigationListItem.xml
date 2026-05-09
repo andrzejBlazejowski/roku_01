@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="NavigationListItem" extends="Group">
+<component name="NavigationListItem" extends="Group" focusable="true">
 	<interface>
 		<field id="width" type="float" onChange="onLayoutChanged" />
 		<field id="height" type="float" onChange="onLayoutChanged" />
