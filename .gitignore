@@ -3,6 +3,8 @@
 out/
 .roku-deploy-staging/
 makefile/dist/
+makefile/makefile
+
 
 # VS Code
 .vscode/
