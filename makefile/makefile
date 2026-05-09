@@ -24,9 +24,7 @@ VERSION = 1.0
 
 ZIP_EXCLUDE= -x \*.pkg -x storeassets\* -x keys\* -x \*/.\*
 
-# roku express development
-DEVPASSWORD=
-ROKU_DEV_TARGET=
+include $(dir $(lastword $(MAKEFILE_LIST)))variables.mk
 
 # Absolute channel root (manifest lives here); keeps `run: remove install` safe with -j.
 MAKEFILE_DIR := $(dir $(lastword $(MAKEFILE_LIST)))

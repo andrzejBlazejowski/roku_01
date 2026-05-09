@@ -3,7 +3,7 @@
 out/
 .roku-deploy-staging/
 makefile/dist/
-makefile/makefile
+makefile/variables.mk
 
 
 # VS Code
