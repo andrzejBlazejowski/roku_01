@@ -105,17 +105,6 @@ function focusIsInsideList(listNode as Object, focused as Object) as Boolean
 	return false
 end function
 
-function itemNodes()
-	out = CreateObject("roArray", 0, true)
-	list = m.navigationItemsList
-	if list = invalid OR list.content = invalid then return out
-	n = list.content.getChildCount()
-	for i = 0 to n - 1
-		c = list.content.getChild(i)
-		if c <> invalid then out.push(c)
-	end for
-	return out
-end function
 
 function onKeyEvent(key as String, press as Boolean) as Boolean
 	if not press then return false

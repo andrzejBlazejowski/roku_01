@@ -1,5 +1,8 @@
 sub init()
 	m.titleLabel = m.top.findNode("titleLabel")
+	m.activeColor = "0xCCFFFFFF"
+	m.inactiveColor = "0xFFCCFFFF"
+	m.selectedColor = "0xFFFFCCFF"
 	ensureNavigationObservers()
 	updateVisualState()
 end sub
@@ -57,7 +60,7 @@ sub updateVisualState()
 	if m.titleLabel = invalid then return
 	focused = m.top.listHasFocus AND (m.top.itemHasFocus OR m.top.focusPercent > 0.5)
 	if focused then
-		m.titleLabel.color = "0xFF0000FF"
+		m.titleLabel.color = m.selectedColor
 		return
 	end if
 	myRoute = invalid
@@ -72,9 +75,9 @@ sub updateVisualState()
 	if activeId = invalid OR activeId = "" then activeId = "home"
 	isActive = myRoute <> invalid AND myRoute <> "" AND activeId = myRoute
 	if isActive then
-		m.titleLabel.color = "0xFFFFFFFF"
+		m.titleLabel.color = m.activeColor
 	else
-		m.titleLabel.color = "0xCCFFFFFF"
+		m.titleLabel.color = m.inactiveColor
 	end if
 end sub
 
