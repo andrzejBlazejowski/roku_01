@@ -5,4 +5,5 @@
 		<Router id="router" translation="[260, 0]" width="1020" height="720" />
 		<Navigation id="navigation" translation="[0, 0]" width="260" height="720" />
 	</children>
+	<script type="text/brightscript" uri="pkg:/components/scenes/AppScene.brs" />
 </component>

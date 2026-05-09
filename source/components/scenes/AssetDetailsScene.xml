@@ -5,6 +5,7 @@
 			id="placeholder"
 			text="Asset details (placeholder)"
 			width="1280"
+			focusable="true"
 			height="720"
 			horizAlign="center"
 			vertAlign="center"

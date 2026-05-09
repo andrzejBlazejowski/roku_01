@@ -1,16 +1,66 @@
 sub init()
-	items = itemNodes()
-	if items.count() > 0 then items[0].setFocus(true)
+	m.navigationItemsList = m.top.findNode("navigationItemsList")
+	m.navigationItemsList.content = navigationContent()
+	m.top.observeField("focusedChild", "OnChildFocused")
+	m.top.setFocus(true)
 end sub
+
+function navigationContent() as Object
+	items = CreateObject("roArray", 0, true)
+	items.push({ routeId: "home", title: "Home" })
+	items.push({ routeId: "trending", title: "Trending" })
+	items.push({ routeId: "about", title: "About" })
+	items.push({ routeId: "settings", title: "Settings" })
+	items.push({ routeId: "assetDetails", title: "Asset details" })
+	items.push({ routeId: "player", title: "Player" })
+	root = CreateObject("roSGNode", "ContentNode")
+	for each spec in items
+		node = CreateObject("roSGNode", "ContentNode")
+		node.addfields({ routeId: "string" })
+		node.routeId = spec.routeId
+		node.TITLE = spec.title
+		root.appendChild(node)
+	end for
+	return root
+end function
+
+sub OnChildFocused()
+	if m.top.focusedChild = invalid then return
+	list = m.navigationItemsList
+	if list = invalid then return
+	if focusIsInsideList(list, m.top.focusedChild) then return
+	list.setFocus(true)
+end sub
+
+function focusIsInsideList(listNode as Object, focused as Object) as Boolean
+	if listNode = invalid OR focused = invalid then return false
+	targetId = listNode.id
+	if targetId = invalid OR targetId = "" then return false
+	n = focused
+	while n <> invalid
+		if n.id <> invalid AND n.id = targetId then return true
+		n = n.getParent()
+	end while
+	return false
+end function
 
 function itemNodes()
 	out = CreateObject("roArray", 0, true)
-	list = m.top.findNode("itemList")
-	if list = invalid then return out
-	n = list.getChildCount()
+	list = m.navigationItemsList
+	if list = invalid OR list.content = invalid then return out
+	n = list.content.getChildCount()
 	for i = 0 to n - 1
-		c = list.getChild(i)
+		c = list.content.getChild(i)
 		if c <> invalid then out.push(c)
 	end for
 	return out
+end function
+
+function onKeyEvent(key as String, press as Boolean) as Boolean
+	if not press then return false
+	print "------------------- navigation onKeyEvent: "; key
+	if key = "options"
+		return true
+	end if
+	return false
 end function

@@ -10,21 +10,15 @@
 			height="28"
 			color="0x888888FF"
 		/>
-		<LayoutGroup
-			id="itemList"
-			layoutDirection="vert"
-			itemSpacing="[0, 16]"
+		<MarkupList
+			id="navigationItemsList"
 			translation="[24, 80]"
-			horizAlignment="left"
-			vertAlignment="top"
-		>
-			<NavigationItem routeId="home" title="Home" />
-			<NavigationItem routeId="trending" title="Trending" />
-			<NavigationItem routeId="about" title="About" />
-			<NavigationItem routeId="settings" title="Settings" />
-			<NavigationItem routeId="assetDetails" title="Asset details" />
-			<NavigationItem routeId="player" title="Player" />
-		</LayoutGroup>
+			itemComponentName="NavigationListItem"
+			itemSize="[212, 42]"
+			itemSpacing="[0, 16]"
+			drawFocusFeedback="false"
+			vertFocusAnimationStyle="floatingFocus"
+		/>
 	</children>
 	<script type="text/brightscript" uri="pkg:/components/navigationBar/Navigation.brs" />
 </component>

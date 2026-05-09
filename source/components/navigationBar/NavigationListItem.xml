@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="NavigationListItem" extends="Group">
+	<interface>
+		<field id="width" type="float" onChange="onLayoutChanged" />
+		<field id="height" type="float" onChange="onLayoutChanged" />
+		<field id="itemContent" type="node" onChange="onItemContentChanged" />
+		<field id="focusPercent" type="float" onChange="onFocusVisualChanged" />
+		<field id="listHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="itemHasFocus" type="bool" onChange="onFocusVisualChanged" />
+	</interface>
+	<children>
+		<Label
+			id="titleLabel"
+			text=""
+			height="42"
+			width="212"
+			horizAlign="left"
+			vertAlign="center"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/navigationBar/NavigationListItem.brs" />
+</component>
