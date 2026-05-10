@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="TrendingScene" extends="Group" focusable="true">
+<component name="TrendingScene" extends="Group" focusable="true" initialFocus="trendingGrid">
 	<children>
-		<Label
-			id="placeholder"
-			text="Trending — grid of tiles (placeholder)"
-			width="1280"
-			height="720"
-			horizAlign="center"
-			vertAlign="center"
+		<TilesGrid
+			id="trendingGrid"
+			translation="[16, 16]"
+			title="Trending"
+			itemComponentName="MovieTile"
+			gridWidth="1248"
+			gridHeight="688"
+			numColumns="4"
+			numRows="3"
+			itemWidth="296"
+			itemHeight="200"
+			itemHorizSpacing="16"
+			itemVertSpacing="20"
 		/>
 	</children>
 	<script type="text/brightscript" uri="pkg:/components/scenes/TrendingScene.brs" />

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="TilesRowList" extends="Group" focusable="true" initialFocus="rowList">
+	<interface>
+		<field id="title" type="string" onChange="onTitleChanged" alwaysNotify="true" />
+		<field id="content" type="node" onChange="onContentChanged" alwaysNotify="true" />
+		<field id="itemComponentName" type="string" onChange="onItemComponentNameChanged" alwaysNotify="true" />
+		<field id="itemWidth" type="float" value="216" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="itemHeight" type="float" value="360" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<!-- Horizontal gap between tiles within the row (name kept for compatibility). -->
+		<field id="itemVertSpacing" type="float" value="18" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="numRows" type="integer" value="1" onChange="onRowListConfigChanged" alwaysNotify="true" />
+		<field id="listWidth" type="float" value="1280" onChange="layoutChrome" alwaysNotify="true" />
+		<field id="listHeight" type="float" value="600" onChange="layoutChrome" alwaysNotify="true" />
+		<field id="itemSelected" type="integer" alwaysNotify="true" />
+		<field id="itemFocused" type="integer" alwaysNotify="true" />
+	</interface>
+	<children>
+		<Label
+			id="titleLabel"
+			width="48"
+			height="40"
+			horizAlign="left"
+			vertAlign="center"
+			font="theme:MediumSystemFont"
+			color="0xFFFFFFFF"
+		/>
+		<RowList
+			id="rowList"
+			translation="[0,44]"
+			drawFocusFeedback="true"
+			rowFocusAnimationStyle="floatingFocus"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/tiles/TilesRowList.brs" />
+</component>

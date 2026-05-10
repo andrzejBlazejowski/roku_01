@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Scrollable grid of custom tiles via MarkupGrid (see PosterGrid vs custom items note in channel docs if needed). -->
+<component name="TilesGrid" extends="Group" focusable="true" initialFocus="tileGrid">
+	<interface>
+		<field id="title" type="string" onChange="onTitleChanged" alwaysNotify="true" />
+		<field id="content" type="node" onChange="onContentChanged" alwaysNotify="true" />
+		<field id="itemComponentName" type="string" onChange="onItemComponentNameChanged" alwaysNotify="true" />
+		<field id="itemWidth" type="float" value="216" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="itemHeight" type="float" value="360" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="itemHorizSpacing" type="float" value="16" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="itemVertSpacing" type="float" value="20" onChange="onItemGeometryChanged" alwaysNotify="true" />
+		<field id="numColumns" type="integer" value="4" onChange="onGridConfigChanged" alwaysNotify="true" />
+		<field id="numRows" type="integer" value="3" onChange="onGridConfigChanged" alwaysNotify="true" />
+		<field id="gridWidth" type="float" value="1280" onChange="layoutChrome" alwaysNotify="true" />
+		<field id="gridHeight" type="float" value="720" onChange="layoutChrome" alwaysNotify="true" />
+		<field id="itemSelected" type="integer" alwaysNotify="true" />
+		<field id="itemFocused" type="integer" alwaysNotify="true" />
+	</interface>
+	<children>
+		<Label
+			id="titleLabel"
+			width="48"
+			height="40"
+			horizAlign="left"
+			vertAlign="center"
+			font="theme:MediumSystemFont"
+			color="0xFFFFFFFF"
+		/>
+		<MarkupGrid
+			id="tileGrid"
+			translation="[0,44]"
+			drawFocusFeedback="true"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/tiles/TilesGrid.brs" />
+</component>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="Tile" extends="Group">
+	<interface>
+		<field id="width" type="float" onChange="onLayoutChanged" />
+		<field id="height" type="float" onChange="onLayoutChanged" />
+		<field id="itemContent" type="node" onChange="onItemContentChanged" />
+		<field id="focusPercent" type="float" onChange="onFocusVisualChanged" />
+		<field id="listHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="gridHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="rowListHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="rowHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="itemHasFocus" type="bool" onChange="onFocusVisualChanged" />
+		<field id="index" type="integer" />
+	</interface>
+	<children>
+		<LayoutGroup
+			id="layout"
+			layoutDirection="vert"
+			horizAlignment="left"
+			itemSpacings="[4]"
+			translation="[8,8]"
+		>
+			<Poster
+				id="poster"
+				loadDisplayMode="scaleToZoom"
+				loadWidth="320"
+				loadHeight="480"
+			/>
+			<Label
+				id="titleLabel"
+				width="200"
+				height="32"
+				font="theme:MediumSystemFont"
+				numLines="2"
+				wrap="true"
+				color="0xEEFFFFFF"
+			/>
+			<Label
+				id="metaLabel"
+				width="200"
+				height="22"
+				font="theme:SmallestSystemFont"
+				numLines="1"
+				color="0xAAFFFFFF"
+			/>
+		</LayoutGroup>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/tiles/Tile.brs" />
+</component>
