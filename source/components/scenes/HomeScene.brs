@@ -1,28 +1,33 @@
 sub init()
-	buildSampleRows()
-	wireRowListFocusChain()
-	m.top.setFocus(true)
+	m.stack = m.top.findNode("homeRowStacks")
+	buildSampleStackContent()
 end sub
 
-sub buildSampleRows()
+sub buildSampleStackContent()
+	if m.stack = invalid then return
 	art = "pkg:/images/channel-poster_hd.png"
-	addRowItems(m.top.findNode("rowFeatured"), art, "Featured", "movie")
-	addRowItems(m.top.findNode("rowMovies"), art, "Pick", "movie")
-	addRowItems(m.top.findNode("rowSeries"), art, "Show", "series")
-	addRowItems(m.top.findNode("rowContinue"), art, "Resume", "movie")
+	root = createObject("roSGNode", "ContentNode")
+	addRowToRoot(root, art, "Featured", "movie", "")
+	addRowToRoot(root, art, "Movies for you", "movie", "")
+	addRowToRoot(root, art, "Popular series", "series", "SeriesTile")
+	addRowToRoot(root, art, "Continue watching", "movie", "")
+	m.stack.content = root
 end sub
 
-sub addRowItems(rowGroup as Object, art as String, namePrefix as String, kind as String)
-	if rowGroup = invalid then return
-	root = createObject("roSGNode", "ContentNode")
+sub addRowToRoot(root as Object, art as String, rowTitle as String, kind as String, rowItemCmp as String)
+	if root = invalid then return
+	rowNode = root.createChild("ContentNode")
+	rowNode.TITLE = rowTitle
+	if rowItemCmp <> invalid AND rowItemCmp <> "" then
+		rowNode.addFields({ rowItemComponentName: rowItemCmp })
+	end if
 	for i = 1 to 6
-		n = root.createChild("ContentNode")
-		n.TITLE = namePrefix + " " + StrI(i)
+		n = rowNode.createChild("ContentNode")
+		n.TITLE = rowTitle + " " + StrI(i)
 		n.HDPOSTERURL = art
 		n.SHORTDESCRIPTIONLINE1 = sampleLine1(kind, i)
 		n.SHORTDESCRIPTIONLINE2 = sampleLine2(kind, i)
 	end for
-	rowGroup.content = root
 end sub
 
 function sampleLine1(kind as String, i as Integer) as String
@@ -35,25 +40,18 @@ function sampleLine2(kind as String, i as Integer) as String
 	return "Director Pick #" + StrI(i)
 end function
 
-sub wireRowListFocusChain()
-	r1 = m.top.findNode("rowFeatured")
-	r2 = m.top.findNode("rowMovies")
-	r3 = m.top.findNode("rowSeries")
-	r4 = m.top.findNode("rowContinue")
-	l1 = listOfRow(r1)
-	l2 = listOfRow(r2)
-	l3 = listOfRow(r3)
-	l4 = listOfRow(r4)
-	if l1 = invalid OR l2 = invalid OR l3 = invalid OR l4 = invalid then return
-	l1.nextFocusDown = l2
-	l2.nextFocusUp = l1
-	l2.nextFocusDown = l3
-	l3.nextFocusUp = l2
-	l3.nextFocusDown = l4
-	l4.nextFocusUp = l3
-end sub
-
-function listOfRow(row as Object) as Object
-	if row = invalid then return invalid
-	return row.findNode("rowList")
-end function
+' function onKeyEvent(key as String, press as Boolean) as Boolean
+'     if not press then return false ' optional: ignore key-up
+'     if key = "OK"
+'         return false ' let focused content handle OK (MarkupList itemSelected, players, etc.)
+'     else if key = "back"
+'         print "Back"
+'         print "home screen --------------------------------"
+'         return true
+'     else if key = "left" or key = "right" or key = "up" or key = "down"
+'         print "D-pad"
+'         print "home screen --------------------------------"
+'         return false ' let focused child or built-in navigation handle it
+'     end if
+'     return false
+' end function

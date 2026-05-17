@@ -31,5 +31,5 @@
 			rowFocusAnimationStyle="floatingFocus"
 		/>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/tiles/TilesRowList.brs" />
+	<script type="text/brightscript" uri="pkg:/components/tilesList/TilesRowList.brs" />
 </component>

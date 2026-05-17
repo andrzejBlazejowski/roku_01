@@ -32,5 +32,5 @@
 			drawFocusFeedback="true"
 		/>
 	</children>
-	<script type="text/brightscript" uri="pkg:/components/tiles/TilesGrid.brs" />
+	<script type="text/brightscript" uri="pkg:/components/tilesGrid/TilesGrid.brs" />
 </component>

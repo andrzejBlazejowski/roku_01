@@ -1,58 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="HomeScene" extends="Group" focusable="true" initialFocus="rowFeatured">
+<component name="HomeScene" extends="Group" focusable="true" initialFocus="homeRowStacks">
 	<children>
-		<LayoutGroup
-			id="rowsLayout"
-			layoutDirection="vert"
-			horizAlignment="left"
+		<TilesRowListStack
+			id="homeRowStacks"
 			translation="[16, 16]"
-			itemSpacings="[12]"
-		>
-			<TilesRowList
-				id="rowFeatured"
-				listWidth="988"
-				listHeight="166"
-				itemWidth="88"
-				itemHeight="118"
-				itemVertSpacing="14"
-				numRows="1"
-				title="Featured"
-				itemComponentName="MovieTile"
-			/>
-			<TilesRowList
-				id="rowMovies"
-				listWidth="988"
-				listHeight="166"
-				itemWidth="88"
-				itemHeight="118"
-				itemVertSpacing="14"
-				numRows="1"
-				title="Movies for you"
-				itemComponentName="MovieTile"
-			/>
-			<TilesRowList
-				id="rowSeries"
-				listWidth="988"
-				listHeight="166"
-				itemWidth="88"
-				itemHeight="118"
-				itemVertSpacing="14"
-				numRows="1"
-				title="Popular series"
-				itemComponentName="SeriesTile"
-			/>
-			<TilesRowList
-				id="rowContinue"
-				listWidth="988"
-				listHeight="166"
-				itemWidth="88"
-				itemHeight="118"
-				itemVertSpacing="14"
-				numRows="1"
-				title="Continue watching"
-				itemComponentName="MovieTile"
-			/>
-		</LayoutGroup>
+			listWidth="988"
+			rowListHeight="166"
+			itemWidth="88"
+			itemHeight="118"
+			itemVertSpacing="14"
+			numRows="1"
+			itemComponentName="MovieTile"
+			rowSpacing="12"
+			viewportHeight="688"
+		/>
 	</children>
 	<script type="text/brightscript" uri="pkg:/components/scenes/HomeScene.brs" />
 </component>

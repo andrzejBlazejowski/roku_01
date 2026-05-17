@@ -26,6 +26,7 @@ sub onContentChanged()
 		return
 	end if
 	m.rowList.content = contentForRowList(c)
+	m.rowList.jumpToRowItem = [0, 0]
 end sub
 
 function contentForRowList(flatOrStructured as Object) as Object
@@ -128,4 +129,16 @@ function rowItemPairSecond(a as Object) as Integer
 	cnt = a.Count()
 	if cnt = invalid OR cnt < 2 then return -1
 	return a[1]
+end function
+
+function onKeyEvent(key as String, press as Boolean) as Boolean
+    if not press then return false ' optional: ignore key-up
+	print "tiles row list --------------------------------"
+    if key = "OK"
+        return false ' let focused content handle OK (MarkupList itemSelected, players, etc.)
+    else if key = "back"
+        print "Back"
+        return true
+    end if
+    return false
 end function

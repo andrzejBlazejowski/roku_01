@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="TilesRowListStack" extends="Group" focusable="true" initialFocus="rowMarkupList">
+	<interface>
+		<!-- One ContentNode per horizontal row: TITLE on the row node; tile ContentNodes as direct children. -->
+		<!-- Optional per row: rowItemComponentName (via row node addFields) overrides itemComponentName for that row only. -->
+		<field id="content" type="node" onChange="onContentChanged" alwaysNotify="true" />
+		<field id="itemComponentName" type="string" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="itemWidth" type="float" value="216" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="itemHeight" type="float" value="360" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="itemVertSpacing" type="float" value="18" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="numRows" type="integer" value="1" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="listWidth" type="float" value="1280" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="rowListHeight" type="float" value="600" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="rowSpacing" type="float" value="12" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<!-- Visible height of the vertical list; content scrolls when rows exceed this. -->
+		<field id="viewportHeight" type="float" value="688" onChange="onSharedLayoutChanged" alwaysNotify="true" />
+		<field id="focusedRowIndex" type="integer" alwaysNotify="true" />
+		<field id="focusedItemIndex" type="integer" alwaysNotify="true" />
+		<field id="itemSelectedRow" type="integer" alwaysNotify="true" />
+		<field id="itemSelectedCol" type="integer" alwaysNotify="true" />
+		<function name="getFirstRowList" />
+		<function name="focusFirstRowTile" />
+	</interface>
+	<children>
+		<MarkupList
+			id="rowMarkupList"
+			itemComponentName="TilesRowListStackItem"
+			itemSize="[1280, 600]"
+			itemSpacing="[0, 12]"
+			drawFocusFeedback="false"
+			vertFocusAnimationStyle="floatingFocus"
+			width="1280"
+			height="688"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/tilesList/TilesRowListStack.brs" />
+</component>

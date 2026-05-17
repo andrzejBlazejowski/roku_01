@@ -7,7 +7,6 @@ sub init()
 	m.top.observeField("focusedChild", "OnChildFocused")
 	m.top.navVisualRev = 0
 	observeSceneFocusedChild()
-	m.top.setFocus(true)
 end sub
 
 sub syncActiveRouteFromRouter()
