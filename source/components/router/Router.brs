@@ -1,7 +1,7 @@
 sub init()
 	m.pageHost = m.top.findNode("pageHost")
 	mapRoutes()
-	if m.top.route = invalid OR m.top.route = "" then m.top.route = "home"
+	if m.top.route = invalid OR m.top.route = "" then m.top.route = "trending"
 	m.top.observeField("route", "onRouteChange")
 	presentRoute(m.top.route)
 end sub
@@ -29,7 +29,6 @@ sub presentRoute(routeId)
 
 	typeName = m.routesById[id]
 	if typeName = invalid then
-		print "Router: unknown route "; id; " — using home"
 		id = "home"
 		typeName = m.routesById[id]
 	end if
@@ -47,7 +46,6 @@ sub presentRoute(routeId)
 
 	page = CreateObject("roSGNode", typeName)
 	if page = invalid then
-		print "Router: failed to create "; typeName
 		return
 	end if
 
@@ -57,13 +55,13 @@ sub presentRoute(routeId)
 
 	w = m.pageHost.width
 	h = m.pageHost.height
-	if w <> invalid AND h <> invalid AND w > 0 AND h > 0 then
-		page.width = w
-		page.height = h
-	else
-		page.width = 1020
-		page.height = 720
-	end if
+	' if w <> invalid AND h <> invalid AND w > 0 AND h > 0 then
+	' 	page.width = w
+	' 	page.height = h
+	' else
+	' 	page.width = 1020
+	' 	page.height = 720
+	' end if
 
 	page.setFocus(true)
 end sub

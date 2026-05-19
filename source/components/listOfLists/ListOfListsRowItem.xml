@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<component name="ListOfListsRowItem" extends="Group" focusable="false">
+	<interface>
+		<field id="itemContent" type="node" onChange="onItemContentChanged" alwaysNotify="true" />
+		<field id="width" type="float" onChange="onLayoutChanged" alwaysNotify="true" />
+		<field id="height" type="float" onChange="onLayoutChanged" alwaysNotify="true" />
+		<field id="focusPercent" type="float" />
+		<field id="listHasFocus" type="bool" />
+		<field id="itemHasFocus" type="bool" />
+	</interface>
+	<children>
+		<Label
+			id="rowLabel"
+			width="48"
+			height="40"
+			horizAlign="left"
+			vertAlign="center"
+			font="theme:MediumSystemFont"
+			color="0xFFFFFFFF"
+		/>
+		<RowList
+			id="tileRow"
+			translation="[0, 44]"
+			drawFocusFeedback="true"
+			itemComponentName="MovieTile"
+			rowFocusAnimationStyle="floatingFocus"
+			numRows="1"
+			showRowLabel="[false]"
+			showRowCounter="[false]"
+		/>
+	</children>
+	<script type="text/brightscript" uri="pkg:/components/listOfLists/ListOfListsRowItem.brs" />
+</component>

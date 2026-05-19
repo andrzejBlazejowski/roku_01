@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<component name="HomeScene" extends="Group" focusable="true" initialFocus="homeRowStacks">
+<component name="HomeScene" extends="Group" focusable="true" initialFocus="homeList">
 	<children>
-		<TilesRowListStack
-			id="homeRowStacks"
+		<ListOfLists
+			id="homeList"
 			translation="[16, 16]"
 			listWidth="988"
-			rowListHeight="166"
+			rowHeight="166"
 			itemWidth="88"
 			itemHeight="118"
-			itemVertSpacing="14"
-			numRows="1"
+			itemHorizSpacing="14"
 			itemComponentName="MovieTile"
 			rowSpacing="12"
 			viewportHeight="688"
